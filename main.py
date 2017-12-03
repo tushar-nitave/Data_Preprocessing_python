@@ -11,18 +11,17 @@ import numpy as np
 import pandas as pd
 import matplotlib.pyplot as pt
 
-#import dataset using pandas
+#--------------------Importing Data and Creating Matrix
+
 dataset = pd.read_csv('iris.csv')
 
-#view the imported dataset by removing '#' present in front of dataset variable
-#dataset
-
-#creating a feature matrix which contains set of independent variables
 X = dataset.iloc[:, :-1]
 
-#creating a matrix which contains set of dependent variable
 Y = dataset.iloc[:, 4]
 
-# Now we can see the two matrix created 'X' which contains independent variables and 'Y' which contains dependent variable
-print('\t------------------Matrix X------------------\n\n',X)
-print('\n\t------------------Matrix Y------------------\n\n',Y)
+#--------------------Dealing with missing data---------------------
+from sklearn.preprocessing import Imputer
+
+imputer  = Imputer(missing_values = 'NaN', strategy = 'mean', axis = 0)
+imputer = imputer.fit(X[:,0:4])
+X[:,0:4] = imputer.transform(X[:,0:4])
