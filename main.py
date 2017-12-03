@@ -11,13 +11,14 @@ import numpy as np
 import pandas as pd
 import matplotlib.pyplot as pt
 
-#--------------------Importing Data and Creating Matrix
+#--------------------Importing Data and Creating Matrix----------------
 
 dataset = pd.read_csv('iris.csv')
 
-X = dataset.iloc[:, :-1]
+X = dataset.iloc[:, :-1].values
 
-Y = dataset.iloc[:, 4]
+Y = dataset.iloc[:, 4].values
+
 
 #--------------------Dealing with missing data---------------------
 from sklearn.preprocessing import Imputer
@@ -25,3 +26,30 @@ from sklearn.preprocessing import Imputer
 imputer  = Imputer(missing_values = 'NaN', strategy = 'mean', axis = 0)
 imputer = imputer.fit(X[:,0:4])
 X[:,0:4] = imputer.transform(X[:,0:4])
+
+
+#------------------Encoding Categorical Values--------------------
+from sklearn.preprocessing import LabelEncoder
+
+labelencoder_Y = LabelEncoder()
+
+Y = labelencoder_Y.fit_transform(Y)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
